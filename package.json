@@ -42,7 +42,7 @@
     "build": "yarn clean; yarn build:server; yarn build:client",
     "build:client": "react-app-rewired build",
     "build:lambda": "webpack --config webpack.config.server.js; node scripts/package",
-    "build:server:ts": "tsc --project tsconfig.server.json",
+    "build:server:ts": "rm -rf dist/server/lambda-packs; tsc --project tsconfig.server.json",
     "build:server": "yarn build:server:ts; yarn build:lambda",
     "clean": "rm -rf dist",
     "deploy:lambda": "node scripts/deploy_lambda",

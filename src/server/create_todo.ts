@@ -1,37 +1,34 @@
 import shortId from "shortid";
 import DynamoDB from "aws-sdk/clients/dynamodb";
 
+import Todo from "../types/todo";
+
 const ddb = new DynamoDB.DocumentClient();
 
-interface CreateTodoType {
-  name: string;
-  dueDate: string;
-}
-
-interface CreateTodoPayloadType {
-  data: CreateTodoType
-}
-
-function addTodo(data: CreateTodoType) {
+function addTodo(data: Todo) {
+  const params = {
+    TableName: "todos",
+    Item: {
+      id: data.id || shortId.generate(),
+      created: new Date().toISOString(),
+      ...data,
+    },
+    ReturnValues: "ALL_OLD",
+  };
   return ddb
-    .put({
-      TableName: "todos",
-      Item: {
-        todoId: shortId.generate(),
-        name: data.name,
-        dueDate: data.dueDate,
-        RequestTime: new Date().toISOString(),
-      },
-    })
-    .promise();
+    .put(params)
+    .promise()
+    .then((data) =>
+      data && Object.keys(data).length ? data.Attributes : params.Item
+    );
 }
 
-exports.handler = function(event: CreateTodoPayloadType, context, cb) {
-  addTodo(event.data)
+exports.handler = function(event: Todo, context, cb) {
+  addTodo(event)
     .then((resp) => {
       cb(null, resp);
     })
-    .catch(err => {
+    .catch((err) => {
       cb(null, err);
     });
 };

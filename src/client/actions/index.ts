@@ -8,85 +8,85 @@ export const setLoading = (
 ): Types.LoadingAction => ({
   type: ACTIONS.IS_LOADING,
   id,
-  status
+  status,
 });
 
 export const saveTodo = (data: Todo): Types.SaveTodoAction => ({
   type: ACTIONS.SAVE_TODO,
-  data
+  data,
 });
 
 export const saveTodoSuccess = (todo: Todo): Types.SaveTodoSuccessAction => ({
   type: ACTIONS.SAVE_TODO_OK,
-  value: todo
+  value: todo,
 });
 
 export const saveTodoFailure = (error: string): Types.FailureAction => ({
   type: ACTIONS.SAVE_TODO_ERR,
-  error
+  error,
 });
 
-export const getTodo = (id: number): Types.GetTodoAction => ({
+export const getTodo = (id: string): Types.GetTodoAction => ({
   type: ACTIONS.GET_TODO,
-  id
+  id,
 });
 
 export const getTodoSuccess = (value: Todo): Types.GetTodoSuccessAction => ({
   type: ACTIONS.GET_TODO_OK,
-  value
+  value,
 });
 
 export const getTodoFailure = (error: string): Types.FailureAction => ({
   type: ACTIONS.GET_TODO_ERR,
-  error
+  error,
 });
 
 export const updateTodo = (value: Todo): Types.UpdateTodoAction => ({
   type: ACTIONS.UPDATE_TODO,
-  value
+  value,
 });
 
 export const updateTodoSuccess = (
   value: Todo
 ): Types.UpdateTodoSuccessAction => ({
   type: ACTIONS.UPDATE_TODO_OK,
-  value
+  value,
 });
 
 export const updateTodoFailure = (error: string): Types.FailureAction => ({
   type: ACTIONS.UPDATE_TODO_ERR,
-  error
+  error,
 });
 
-export const deleteTodo = (id: number): Types.DeleteTodoAction => ({
+export const deleteTodo = (id: string): Types.DeleteTodoAction => ({
   type: ACTIONS.DEL_TODO,
-  id
+  id,
 });
 
 export const deleteTodoSuccess = (
   value: Todo
 ): Types.DeleteTodoSuccessAction => ({
   type: ACTIONS.DEL_TODO_OK,
-  value
+  value,
 });
 
 export const deleteTodoFailure = (error: string): Types.FailureAction => ({
   type: ACTIONS.DEL_TODO_ERR,
-  error
+  error,
 });
 
 export const getTodos = () => ({
-  type: ACTIONS.GET_TODOS
+  type: ACTIONS.GET_TODOS,
 });
 
 export const getTodosSuccess = (
   value: Todo[]
 ): Types.GetTodosSuccessAction => ({
   type: ACTIONS.GET_TODOS_OK,
-  value
+  value,
 });
 
 export const getTodosFailure = (error: string): Types.FailureAction => ({
   type: ACTIONS.GET_TODOS_ERR,
-  error
+  error,
 });

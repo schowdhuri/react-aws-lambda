@@ -32,7 +32,7 @@ export interface GetTodosSuccessAction {
 
 export interface GetTodoAction {
   type: string;
-  id: number;
+  id: string;
 }
 
 export interface GetTodoSuccessAction {
@@ -52,7 +52,7 @@ export interface UpdateTodoSuccessAction {
 
 export interface DeleteTodoAction {
   type: string;
-  id: number;
+  id: string;
 }
 
 export interface DeleteTodoSuccessAction {

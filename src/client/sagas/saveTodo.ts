@@ -2,20 +2,41 @@ import { takeEvery, put, call } from "redux-saga/effects";
 
 import { IS_LOADING, SAVE_TODO } from "../../constants/actions";
 import { setLoading, saveTodoSuccess, saveTodoFailure } from "../actions";
-import request from "../../utils/request";
-import API_ROOT from "../../constants/apiRoot";
+import lambda from "../utils/awsLambda";
 import { SaveTodoAction } from "../../types/actions";
+
+function invoke(data: string) {
+  return new Promise((resolve, reject) => {
+    lambda.invoke(
+      {
+        FunctionName: "create_todo",
+        InvocationType: "RequestResponse",
+        LogType: "None",
+        Payload: data,
+      },
+      function(err: any, data: any) {
+        if (err) {
+          console.log({ err });
+          reject(err);
+        } else {
+          try {
+            const payload = JSON.parse(data.Payload);
+            resolve(payload);
+          } catch (ex) {
+            reject(ex);
+          }
+        }
+      }
+    );
+  });
+}
 
 function* saveTodo(action: SaveTodoAction) {
   const { data } = action;
   yield put(setLoading(SAVE_TODO, true));
   try {
-    const response: any = yield call(request, `${API_ROOT}api/todo`, {
-      method: "post",
-      dataType: "json",
-      data
-    });
-    yield put(saveTodoSuccess(response.json));
+    const response: any = yield call(invoke, JSON.stringify(data));
+    yield put(saveTodoSuccess(response));
   } catch (ex) {
     console.log(ex);
     yield put(saveTodoFailure(ex.text));

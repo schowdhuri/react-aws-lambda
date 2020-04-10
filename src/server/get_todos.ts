@@ -2,24 +2,16 @@ import DynamoDB from "aws-sdk/clients/dynamodb";
 
 const ddb = new DynamoDB.DocumentClient();
 
-interface DeleteTodoPayloadType {
-  id: string;
-}
-
-function deleteTodo(id: string) {
+function getTodos() {
   return ddb
-    .delete({
+    .scan({
       TableName: "todos",
-      Key: {
-        id,
-      },
-      ReturnValues: "ALL_OLD"
     })
     .promise();
 }
 
-exports.handler = function(event: DeleteTodoPayloadType, context, cb) {
-  deleteTodo(event.id)
+exports.handler = function(event, context, cb) {
+  getTodos()
     .then((resp) => {
       cb(null, resp);
     })
