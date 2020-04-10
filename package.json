@@ -1,0 +1,67 @@
+{
+  "name": "react-aws-lambda",
+  "version": "1.0.0",
+  "private": false,
+  "author": "Subir Chowdhuri <schowdhuri@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.7",
+    "@types/react-router-dom": "^5.1.3",
+    "@types/styled-components": "^4.4.2",
+    "aws-sdk": "^2.655.0",
+    "connected-react-router": "^6.7.0",
+    "react": "^16.12.0",
+    "react-app-rewired": "^2.1.5",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.1",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
+    "reflect-metadata": "^0.1.13",
+    "reselect": "^4.0.0",
+    "shortid": "^2.2.15",
+    "styled-components": "^5.0.1",
+    "typescript": "~3.7.2"
+  },
+  "devDependencies": {
+    "commander": "^5.0.0",
+    "glob": "^7.1.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "proxy": "http://localhost:3001",
+  "scripts": {
+    "build": "yarn clean; yarn build:server; yarn build:client",
+    "build:client": "react-app-rewired build",
+    "build:lambda": "webpack --config webpack.config.server.js; node scripts/package",
+    "build:server:ts": "tsc --project tsconfig.server.json",
+    "build:server": "yarn build:server:ts; yarn build:lambda",
+    "clean": "rm -rf dist",
+    "deploy:lambda": "node scripts/deploy_lambda",
+    "start": "react-app-rewired start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
