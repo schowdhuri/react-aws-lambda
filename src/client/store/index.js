@@ -8,7 +8,6 @@ const composeEnhancers =
     : compose;
 
 export default function configureStore(reducer, middleware) {
-  console.log({ REACT_APP_TARGET_ENV: process.env.REACT_APP_TARGET_ENV });
   const store = createStore(
     reducer,
     {},
