@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "37612b49c50595ffc9619f680689088b",
+    "revision": "ad36510d575006d9a08bb0198ef03358",
     "url": "/react-aws-lambda/index.html"
   },
   {
-    "revision": "512558cafd04a3344df2",
+    "revision": "d9e52862094eaeb73c0a",
     "url": "/react-aws-lambda/static/css/main.1e813b89.chunk.css"
   },
   {
-    "revision": "bfde13c7b243ea2a4ac0",
-    "url": "/react-aws-lambda/static/js/2.fdae60ba.chunk.js"
+    "revision": "afb986174c8b94d5bda6",
+    "url": "/react-aws-lambda/static/js/2.768bd278.chunk.js"
   },
   {
     "revision": "835895672b0e80fccc86bf50d23ca6eb",
-    "url": "/react-aws-lambda/static/js/2.fdae60ba.chunk.js.LICENSE.txt"
+    "url": "/react-aws-lambda/static/js/2.768bd278.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "512558cafd04a3344df2",
-    "url": "/react-aws-lambda/static/js/main.28c6c3eb.chunk.js"
+    "revision": "d9e52862094eaeb73c0a",
+    "url": "/react-aws-lambda/static/js/main.56caa441.chunk.js"
   },
   {
     "revision": "2953cb08b9fc369cee97",
