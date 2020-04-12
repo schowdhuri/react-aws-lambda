@@ -1,6 +1,6 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 
-import { IS_LOADING, UPDATE_TODO } from "../../constants/actions";
+import { UPDATE_TODO } from "../../constants/actions";
 import { setLoading, updateTodoSuccess, updateTodoFailure } from "../actions";
 import lambda from "../utils/awsLambda";
 import { UpdateTodoAction } from "../../types/actions";

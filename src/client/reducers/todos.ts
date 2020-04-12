@@ -1,5 +1,4 @@
 import * as ACTIONS from "../../constants/actions";
-import * as Types from "../../types/actions";
 import Todo from "../../types/todo";
 
 const initialState: Array<Todo> = [];

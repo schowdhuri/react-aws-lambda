@@ -1,12 +1,9 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { FunctionComponent } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import styled from "styled-components";
 
 import history from "../utils/history";
-import Todo from "../../types/todo";
-import { getTodos } from "../selectors";
 import CreateTodo from "./CreateTodo";
 import TodoList from "./TodoList";
 

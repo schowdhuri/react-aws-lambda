@@ -1,9 +1,8 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 
-import { IS_LOADING, DEL_TODO } from "../../constants/actions";
+import { DEL_TODO } from "../../constants/actions";
 import { setLoading, deleteTodoSuccess, deleteTodoFailure } from "../actions";
 import lambda from "../utils/awsLambda";
-import API_ROOT from "../../constants/apiRoot";
 import { DeleteTodoAction } from "../../types/actions";
 
 function invoke(data: string) {

@@ -1,4 +1,3 @@
-import { createSelector } from "reselect";
 import { RootState } from "../../types/rootState";
 import UIState from "../../types/uistate";
 import Todo from "../../types/todo";

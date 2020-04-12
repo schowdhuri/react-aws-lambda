@@ -1,10 +1,7 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { FunctionComponent, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import * as actions from "../actions/index";
-import Todo from "../../types/todo";
-import { getTodos } from "../selectors";
-import logo from "../images/logo.svg";
 import "./App.css";
 
 interface CreateTodoProps {}

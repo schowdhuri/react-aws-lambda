@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -25,7 +25,7 @@ const TodoList: FunctionComponent<TodoListProps> = () => {
   const uiState: UIState = useSelector(getUiState);
   useEffect(() => {
     dispatch(actions.getTodos());
-  }, []);
+  }, [dispatch]);
   // handlers
   const changeCompleted = (item: Todo) => () => {
     dispatch(

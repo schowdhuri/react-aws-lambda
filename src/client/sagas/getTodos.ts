@@ -1,9 +1,8 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 
-import { IS_LOADING, GET_TODOS } from "../../constants/actions";
+import { GET_TODOS } from "../../constants/actions";
 import { setLoading, getTodosSuccess, getTodosFailure } from "../actions";
 import lambda from "../utils/awsLambda";
-import API_ROOT from "../../constants/apiRoot";
 import { GetTodosAction } from "../../types/actions";
 
 function invoke() {
