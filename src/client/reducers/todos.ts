@@ -11,30 +11,39 @@ export default (state = initialState, action: any) => {
     case ACTIONS.GET_TODOS_OK:
       return action.value;
 
-    case ACTIONS.SAVE_TODO_OK:
-      return [action.value, ...state];
+    case ACTIONS.SAVE_TODO:
+      return [action.data, ...state];
 
-    case ACTIONS.UPDATE_TODO_OK: {
-      const value: Todo = action.value;
-      const index: number = state.findIndex(item => item.id === value.id);
+    case ACTIONS.SAVE_TODO_OK: {
+      const index: number = state.findIndex((item) => item.id === action.fakeId);
       if (index !== -1) {
         return [
           ...state.slice(0, index),
           action.value,
-          ...state.slice(index + 1)
+          ...state.slice(index + 1),
         ];
       }
       break;
     }
 
-    case ACTIONS.DEL_TODO_OK: {
+    case ACTIONS.SAVE_TODO_ERR:
+      return state.filter((item) => item.id !== action.fakeId);
+
+    case ACTIONS.UPDATE_TODO: {
       const value: Todo = action.value;
-      const index: number = state.findIndex(item => item.id === value.id);
+      const index: number = state.findIndex((item) => item.id === value.id);
       if (index !== -1) {
-        return [...state.slice(0, index), ...state.slice(index + 1)];
+        return [
+          ...state.slice(0, index),
+          action.value,
+          ...state.slice(index + 1),
+        ];
       }
       break;
     }
+
+    case ACTIONS.DEL_TODO_OK:
+      return state.filter((item) => item.id !== action.value.id);
   }
   return state;
 };

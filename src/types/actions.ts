@@ -14,6 +14,13 @@ export interface SaveTodoAction {
 export interface SaveTodoSuccessAction {
   type: string;
   value: Todo;
+  fakeId: string;
+}
+
+export interface SaveTodoFailureAction {
+  type: string;
+  error: string;
+  fakeId: string;
 }
 
 export interface FailureAction {
@@ -58,4 +65,10 @@ export interface DeleteTodoAction {
 export interface DeleteTodoSuccessAction {
   type: string;
   value: Todo;
+}
+
+export interface DeleteTodoFailureAction {
+  type: string;
+  error: string;
+  id: string;
 }

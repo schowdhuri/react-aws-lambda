@@ -11,8 +11,6 @@ import createRootReducer from "./reducers";
 import sagas from "./sagas";
 import App from "./components/App";
 
-import "./css/index.css";
-
 const sagaMiddleware = createMiddleware();
 const rootReducer = createRootReducer(history);
 const store = configureStore(rootReducer, [

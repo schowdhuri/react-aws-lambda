@@ -32,14 +32,16 @@ function invoke(data: string) {
 }
 
 function* saveTodo(action: SaveTodoAction) {
-  const { data } = action;
+  const data = { ...action.data };
+  const fakeId: string = data.id!;
+  delete data.id;
   yield put(setLoading(SAVE_TODO, true));
   try {
     const response: any = yield call(invoke, JSON.stringify(data));
-    yield put(saveTodoSuccess(response));
+    yield put(saveTodoSuccess(response, fakeId));
   } catch (ex) {
     console.log(ex);
-    yield put(saveTodoFailure(ex.text));
+    yield put(saveTodoFailure(ex.text, fakeId));
   }
   yield put(setLoading(SAVE_TODO, false));
 }

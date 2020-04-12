@@ -1,3 +1,4 @@
+import shortId from "shortid";
 import * as ACTIONS from "../../constants/actions";
 import * as Types from "../../types/actions";
 import Todo from "../../types/todo";
@@ -13,17 +14,28 @@ export const setLoading = (
 
 export const saveTodo = (data: Todo): Types.SaveTodoAction => ({
   type: ACTIONS.SAVE_TODO,
-  data,
+  data: {
+    ...data,
+    id: shortId.generate(), // fake ID for optimistic UI update
+  },
 });
 
-export const saveTodoSuccess = (todo: Todo): Types.SaveTodoSuccessAction => ({
+export const saveTodoSuccess = (
+  todo: Todo,
+  fakeId: string
+): Types.SaveTodoSuccessAction => ({
   type: ACTIONS.SAVE_TODO_OK,
   value: todo,
+  fakeId,
 });
 
-export const saveTodoFailure = (error: string): Types.FailureAction => ({
+export const saveTodoFailure = (
+  error: string,
+  fakeId: string
+): Types.SaveTodoFailureAction => ({
   type: ACTIONS.SAVE_TODO_ERR,
   error,
+  fakeId,
 });
 
 export const getTodo = (id: string): Types.GetTodoAction => ({
@@ -70,9 +82,13 @@ export const deleteTodoSuccess = (
   value,
 });
 
-export const deleteTodoFailure = (error: string): Types.FailureAction => ({
+export const deleteTodoFailure = (
+  error: string,
+  id: string
+): Types.DeleteTodoFailureAction => ({
   type: ACTIONS.DEL_TODO_ERR,
   error,
+  id,
 });
 
 export const getTodos = () => ({

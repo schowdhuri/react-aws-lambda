@@ -1,9 +1,12 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+
 import * as actions from "../actions/index";
 import Todo from "../../types/todo";
-import { getTodos } from "../selectors";
+import UIState from "../../types/uistate";
+import { getTodos, getUiState } from "../selectors";
+import spin from "../utils/spinanim";
 
 interface TodoListProps {}
 
@@ -12,9 +15,14 @@ interface CheckboxProps {
   onClick?: any;
 }
 
+interface ItemNameProps {
+  completed: boolean;
+}
+
 const TodoList: FunctionComponent<TodoListProps> = () => {
   const dispatch = useDispatch();
   const todos: Todo[] = useSelector(getTodos);
+  const uiState: UIState = useSelector(getUiState);
   useEffect(() => {
     dispatch(actions.getTodos());
   }, []);
@@ -23,7 +31,7 @@ const TodoList: FunctionComponent<TodoListProps> = () => {
     dispatch(
       actions.updateTodo({
         ...item,
-        completed: !item.completed
+        completed: !item.completed,
       })
     );
   };
@@ -31,25 +39,48 @@ const TodoList: FunctionComponent<TodoListProps> = () => {
     dispatch(actions.deleteTodo(item.id!));
   };
   // render
-  return (
+  return uiState.loadingTodos ? (
+    <LoadingTodos>
+      <i className="fa fa-spinner" />
+      Loading ...
+    </LoadingTodos>
+  ) : (
     <List>
-      {todos.map(item => (
-        <Item key={item.id}>
-          <Checkbox completed={item.completed} onClick={changeCompleted(item)}>
-            {!item.completed || <i className="fa fa-check" />}
-          </Checkbox>
-          <ItemName onClick={changeCompleted(item)}>{item.name}</ItemName>
-          <ItemActions>
-            <DeleteButton onClick={deleteTodo(item)}>
-              <i className="fa fa-times" />
-            </DeleteButton>
-          </ItemActions>
-        </Item>
-      ))}
+      {todos
+        .filter((item) => !uiState.deleting.find((id) => id === item.id))
+        .map((item) => (
+          <Item key={item.id}>
+            <Checkbox
+              completed={item.completed}
+              onClick={changeCompleted(item)}
+            >
+              {!item.completed || <i className="fa fa-check" />}
+            </Checkbox>
+            <ItemName
+              completed={item.completed}
+              onClick={changeCompleted(item)}
+            >
+              {item.name}
+            </ItemName>
+            <ItemActions>
+              <DeleteButton onClick={deleteTodo(item)}>
+                <i className="fa fa-times" />
+              </DeleteButton>
+            </ItemActions>
+          </Item>
+        ))}
     </List>
   );
 };
 
+const LoadingTodos = styled.div`
+  display: flex;
+  padding: 1rem;
+  .fa {
+    margin-right: 5px;
+    ${spin};
+  }
+`;
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
@@ -77,7 +108,7 @@ const Checkbox = styled.label<CheckboxProps>`
   margin-right: 1rem;
   width: 2rem;
 
-  ${props =>
+  ${(props) =>
     props.completed
       ? `
       background-color: #17ab26;
@@ -91,8 +122,16 @@ const Checkbox = styled.label<CheckboxProps>`
     display: none;
   }
 `;
-const ItemName = styled.div`
+const ItemName = styled.div<ItemNameProps>`
   flex: 5;
+
+  ${props => props.completed
+    ? `
+      font-style: italic;
+      opacity: 0.7;
+      text-decoration: line-through;
+    `
+    : ""}
 `;
 const ItemActions = styled.div`
   display: flex;

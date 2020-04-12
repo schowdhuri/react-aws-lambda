@@ -13,9 +13,10 @@ function deleteTodo(id: string) {
       Key: {
         id,
       },
-      ReturnValues: "ALL_OLD"
+      ReturnValues: "ALL_OLD",
     })
-    .promise();
+    .promise()
+    .then((data) => (data && data.Attributes) || {});
 }
 
 exports.handler = function(event: DeleteTodoPayloadType, context, cb) {

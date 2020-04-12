@@ -37,10 +37,11 @@ function* deleteTodo(action: DeleteTodoAction) {
   yield put(setLoading(DEL_TODO, true));
   try {
     const response: any = yield call(invoke, JSON.stringify({ id }));
+    console.log(response)
     yield put(deleteTodoSuccess(response));
   } catch (ex) {
     console.log(ex);
-    yield put(deleteTodoFailure(ex.text));
+    yield put(deleteTodoFailure(ex.text, id));
   }
   yield put(setLoading(DEL_TODO, false));
 }
